@@ -75,4 +75,4 @@ function game() {
   console.log("Computer: " + scoreComputer);
 }
 
-game();
+// game();

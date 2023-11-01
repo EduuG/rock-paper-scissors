@@ -1,0 +1,51 @@
+html {
+    display: flex;
+    height: 100vh;
+}
+
+body {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#window {
+    height: 60vh;
+    width: 20vw;
+    padding: 10px;
+    background-color: black;
+    border-radius: 10px;
+}
+
+#titlebar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+#titlebar p {
+    margin: 0;
+}
+
+#container {
+    display: flex;
+    height: 95%;
+    align-items: end;
+    background-color: whitesmoke;
+    border-radius: 10px;
+}
+
+#buttons {
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-evenly;
+    padding: 10px;
+}
+
+#buttons .btn {
+    height: 8vh;
+    width: 5vw;
+}
