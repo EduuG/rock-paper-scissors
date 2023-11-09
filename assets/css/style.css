@@ -10,7 +10,7 @@ body {
   align-items: center;
   margin: 0;
   height: 100vh;
-  background-image: url("./assets/R.jpg");
+  background-image: url("../Images/background.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   font-family: 'Lato', sans-serif;
