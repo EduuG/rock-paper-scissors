@@ -5,17 +5,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="./style.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/ed9fdd1525.js" crossorigin="anonymous"></script>
   </head>
   <body>
     <div id="window">
       <div id="titlebar">
         <p>Rock, Paper and Scissors</p>
       </div>
+      <div id="home">
+        <p>Jokenpo</p>
+        <button id="start">Start</button>
+      </div>
       <div id="container">
+        
+        <div class="upper">
+          <div id="round-counter"></div>
+          <div id="score-container">
+            <div>
+              <h1 class="score-computer"></h1>
+              <h3 class="score-text">You</h3>
+            </div>
+            <div>
+              <h1 class="score-player"></h1>
+              <h3 class="score-text">Computer</h3>
+            </div>
+          </div>
+        </div>
+
         <span id="buttons">
-          <button class="btn">Rock</button>
-          <button class="btn">Paper</button>
-          <button class="btn">Scissors</button>
+
+          <button id="rock" class="btn">
+            <i class="fa-solid fa-hand-back-fist"></i>
+          </button>
+
+          <button id="paper" class="btn">
+            <i class="fa-solid fa-hand"></i>
+          </button>
+
+          <button id="scissors" class="btn">
+            <i class="fa-solid fa-hand-scissors"></i>
+          </button>
+
         </span>
       </div>
     </div>

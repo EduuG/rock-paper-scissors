@@ -1,3 +1,30 @@
+const homePage = document.querySelector("#home");
+const container = document.querySelector("#container");
+const titleBar = document.querySelector("#titlebar")
+const startButton = homePage.querySelector("#start");
+
+startButton.addEventListener("click", startGame);
+
+function startGame() {
+  homePage.remove();
+  container.style.display = "flex";
+  titleBar.style.display = "flex";
+
+  game();
+}
+
+
+function getPlayerChoice() {
+  const buttons = document.querySelectorAll(".btn");
+  
+  buttons.forEach(button => {
+    button.addEventListener("click", () => {
+      return button.id
+    });
+  });
+}
+
+
 function getComputerChoice() {
   const rock = {
     name: "rock",
@@ -25,16 +52,12 @@ function getComputerChoice() {
 
 
 function playRound(playerSelection, computerSelection) {
-  const possibilities = ["rock", "paper", "scissors"];
-  player = playerSelection.toLowerCase();
+  player = playerSelection;
   computer = computerSelection;
 
-  if (possibilities.includes(player)) {
-    if (player === computer.name) return "Tied!";
-    if (player === computer.defeats) return `You lose! ${computer.name} beats ${player}`;
-    return `You win! ${player} beats ${computer.name}`;
-  }
-  return false
+  if (player === computer.name) return "Tied!";
+  if (player === computer.defeats) return `You lose! ${computer.name} beats ${player}`;
+  return `You win! ${player} beats ${computer.name}`;
 }
 
 
@@ -42,37 +65,57 @@ function game() {
   let scorePlayer = 0;
   let scoreComputer = 0;
 
-  for (let i = 0; i < 5; i++) {
-    while (true) {
-      const playerSelection = prompt("Rock, paper or scissors?");
-      const round = playRound(playerSelection, getComputerChoice());
+  let scorePlayerDom = document.querySelector(".score-player");
+  let scoreComputerDom = document.querySelector(".score-computer");
+  let roundCounterDom = document.querySelector("#round-counter")
 
-      if (!round) continue;
+  scorePlayerDom.innerText = scorePlayer;
+  scoreComputerDom.innerText = scoreComputer;
+
+  const buttons = document.querySelectorAll(".btn");
+  let roundCount = 1;
+
+  roundCounterDom.innerText = "Round " + roundCount;
+
+  buttons.forEach(button => {
+    button.addEventListener("click", () => {
+      const round = playRound(button.id, getComputerChoice());
 
       if (round.includes("Tied!")) {
-        scorePlayer += 1;
-        scoreComputer += 1;
+        scorePlayer++;
+        scoreComputer++;
       }
 
       if (round.includes("win!")) {
-        scorePlayer += 1;
+        scorePlayer++;
       }
 
       if (round.includes("lose!")) {
-        scoreComputer += 1;
+        scoreComputer++;
       }
       
+      roundCount++;
+      if (roundCount <= 5) {
+        roundCounterDom.innerText = "Round " + roundCount;
+      }
+
+      scorePlayerDom.innerText = scorePlayer;
+      scoreComputerDom.innerText = scoreComputer;
+
       console.log(round);
-      break;
-    }
-  }
 
-  scorePlayer === scoreComputer ? console.log("Game tied!")
-  : scorePlayer < scoreComputer ? console.log("Computer wins!")
-  : console.log("You win!");
+      if (roundCount > 5) {
+        scorePlayer === scoreComputer ? console.log("Game tied!")
+        : scorePlayer < scoreComputer ? console.log("Computer wins!")
+        : console.log("You win!");
 
-  console.log("Player: " + scorePlayer);
-  console.log("Computer: " + scoreComputer);
+        console.log("Player: " + scorePlayer);
+        console.log("Computer: " + scoreComputer);
+
+        buttons.forEach(item => {
+          item.parentElement.remove();
+        });
+      }
+    });
+  });
 }
-
-// game();
