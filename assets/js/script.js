@@ -10,6 +10,9 @@ function startGame() {
   container.style.display = "flex";
   titleBar.style.display = "flex";
 
+  const windowContainer = document.querySelector("#window");
+  windowContainer.style.height = "600px";
+
   game();
 }
 
@@ -55,6 +58,23 @@ function playRound(playerSelection, computerSelection) {
   player = playerSelection;
   computer = computerSelection;
 
+  const showChoice = document.querySelector(".showChoice");
+
+  if (document.querySelector(".showPlayerChoice") && document.querySelector(".showComputerChoice")) {
+    document.querySelector(".showPlayerChoice").remove();
+    document.querySelector(".showComputerChoice").remove();
+  }
+
+  let showPlayerChoice = document.createElement("p");
+  showPlayerChoice.classList.add("showPlayerChoice");
+  showPlayerChoice.innerText = playerSelection;
+  showChoice.appendChild(showPlayerChoice);
+
+  let showComputerChoice = document.createElement("p");
+  showComputerChoice.classList.add("showComputerChoice");
+  showComputerChoice.innerText = computerSelection.name;
+  showChoice.appendChild(showComputerChoice);
+
   if (player === computer.name) return "Tied!";
   if (player === computer.defeats) return `You lose! ${computer.name} beats ${player}`;
   return `You win! ${player} beats ${computer.name}`;
@@ -65,9 +85,45 @@ function game() {
   let scorePlayer = 0;
   let scoreComputer = 0;
 
+  const showChoice = document.querySelector(".showChoice")
+
   let scorePlayerDom = document.querySelector(".score-player");
   let scoreComputerDom = document.querySelector(".score-computer");
   let roundCounterDom = document.querySelector("#round-counter")
+
+  const buttonsContainer = document.querySelector("#buttons");
+
+  const rockBtn = document.createElement("button");
+  const paperBtn = document.createElement("button");
+  const scissorsBtn = document.createElement("button");
+
+  const rockBtnLogo = document.createElement("i");
+  const paperBtnLogo = document.createElement("i");
+  const scissorsBtnLogo = document.createElement("i");
+
+  rockBtnLogo.classList.add("fa-solid");
+  paperBtnLogo.classList.add("fa-solid");
+  scissorsBtnLogo.classList.add("fa-solid");
+
+  rockBtnLogo.classList.add("fa-hand-back-fist");
+  paperBtnLogo.classList.add("fa-hand");
+  scissorsBtnLogo.classList.add("fa-hand-scissors");
+
+  rockBtn.classList.add("btn");
+  rockBtn.setAttribute("id", "rock");
+  rockBtn.appendChild(rockBtnLogo);
+
+  paperBtn.classList.add("btn");
+  paperBtn.setAttribute("id", "paper");
+  paperBtn.appendChild(paperBtnLogo);
+
+  scissorsBtn.classList.add("btn");
+  scissorsBtn.setAttribute("id", "scissor");
+  scissorsBtn.appendChild(scissorsBtnLogo);
+
+  buttonsContainer.appendChild(rockBtn);
+  buttonsContainer.appendChild(paperBtn);
+  buttonsContainer.appendChild(scissorsBtn);
 
   scorePlayerDom.innerText = scorePlayer;
   scoreComputerDom.innerText = scoreComputer;
@@ -80,6 +136,8 @@ function game() {
   buttons.forEach(button => {
     button.addEventListener("click", () => {
       const round = playRound(button.id, getComputerChoice());
+
+      showChoice.style.display = "flex";
 
       if (round.includes("Tied!")) {
         scorePlayer++;
@@ -113,8 +171,22 @@ function game() {
         console.log("Computer: " + scoreComputer);
 
         buttons.forEach(item => {
-          item.parentElement.remove();
+          item.remove();
         });
+
+        const restartBtn = document.createElement("button");
+        restartBtn.classList.add("bigBtn");
+        restartBtn.innerText = "Restart";
+
+        restartBtn.addEventListener("click", () => {
+          restartBtn.remove();
+          showChoice.style.display = "none";
+          game()
+        })
+
+        buttonsContainer.appendChild(restartBtn);
+        
+        
       }
     });
   });

@@ -27,8 +27,9 @@ p {
   align-items: center;
   gap: 10px;
   width: 400px;
-  height: 600px;
+  height: 200px;
   padding: 10px;
+  transition: 0.3s;
   background-color: #eff8ffaf;
   border-radius: 15px;
   box-shadow: 0px 8px 12px -6px rgba(0,0,0,0.4);
@@ -53,7 +54,7 @@ p {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  height: 30%;
+  height: 90%;
   width: 80%;
   border-radius: 15px;
   background-color: #eff8ff;
@@ -62,7 +63,7 @@ p {
 -moz-box-shadow: 0px 8px 12px -6px rgba(0,0,0,0.4);
 }
 
-#start {
+.bigBtn {
   font-size: 25px;
   border-radius: 50px;
   width: 60%;
@@ -122,6 +123,15 @@ p {
 
 #score-container > h1, h3 {
   margin: 0;
+}
+
+.center {
+  width: 100%;
+}
+
+.showChoice {
+  display: flex;
+  justify-content: space-around;
 }
 
 #buttons {
